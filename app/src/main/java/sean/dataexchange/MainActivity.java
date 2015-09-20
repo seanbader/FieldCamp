@@ -34,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
     private ListView myListView;
     private ArrayAdapter<String> BTArrayAdapter;
 
-    // Hello World
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button exchange;
+        final Context context = this;
+        exchange = (Button) findViewById(R.id.Exchange);
 
         // take an instance of BluetoothAdapter - Bluetooth radio
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -111,8 +114,13 @@ public class MainActivity extends AppCompatActivity {
             BTArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
             myListView.setAdapter(BTArrayAdapter);
 
-
-
+            exchange.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    Intent intent = new Intent(context, DataTransfer.class);
+                    startActivity(intent);
+                }
+            });
 
 
 
