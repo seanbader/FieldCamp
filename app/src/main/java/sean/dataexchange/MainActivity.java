@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView myListView;
     private ArrayAdapter<String> BTArrayAdapter;
 
+    // Hello World
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             myListView.setAdapter(BTArrayAdapter);
 
 
-            
+
 
 
 
