@@ -3,7 +3,7 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".bt_settings">
 
     <TextView
         android:id="@+id/text"
@@ -29,47 +29,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/off" />
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_marginTop="80dp" >
 
         <Button
-            android:id="@+id/paired"
+            android:id="@+id/LinkDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/List" />
-
-        <Button
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Find" />
-
-        <Button
-            android:id="@+id/discover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Discover" />
-
-        <ListView
-            android:id="@+id/listView1"
-            android:layout_width="fill_parent"
-            android:layout_height="200dp" >
-        </ListView>
-
-        <Button
-            android:id="@+id/Exchange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Exchange" />
-
+            android:text="@string/LinkDevices" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="430dp" >
+
+        <Button
+            android:id="@+id/HomePage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/HomePage" />
+    </LinearLayout>
 
 </RelativeLayout>

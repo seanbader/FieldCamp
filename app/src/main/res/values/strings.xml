@@ -7,20 +7,18 @@
     <string name="Text">Status: -</string>
     <string name="on">Turn On</string>
     <string name="off">Turn Off</string>
-    <string name="List">List paired Devices</string>
-    <string name="Find">Search new Devices / Cancel</string>
-    <string name="Discover">Make Device Discoverable</string>
-    <string name="Exchange">Exchange Data</string>
-
-    <string name="bt_settings">Bluetooth Settings</string>
-
-    <string name="clickhere">Click Here</string>
-    <string name="blu_notfound_inlist">No Bluetooth</string>
+    <string name="LinkDevices">Link Bluetooth Devices</string>
+    <string name="HomePage">Return to Home Page</string>
 
 
-    <string name="secure_connect">Connect a device - Secure</string>
-    <string name="insecure_connect">Connect a device - Insecure</string>
-    <string name="discoverable">Make discoverable</string>
-
+    <!--Device List Activity-->
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    <string name="BluetoothSettings">Return to Bluetooth Settings</string>
 
 </resources>
