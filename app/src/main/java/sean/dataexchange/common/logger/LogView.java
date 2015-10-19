@@ -20,6 +20,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+
 /** Simple TextView which is used to output log data received through the LogNode interface.
 */
 public class LogView extends TextView implements LogNode {
@@ -77,7 +78,7 @@ public class LogView extends TextView implements LogNode {
         // Handily, the Log class has a facility for converting a stack trace into a usable string.
         String exceptionStr = null;
         if (tr != null) {
-            exceptionStr = Log.getStackTraceString(tr);
+            exceptionStr = android.util.Log.getStackTraceString(tr);
         }
 
         // Take the priority, tag, message, and exception, and concatenate as necessary
