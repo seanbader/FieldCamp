@@ -17,15 +17,28 @@
 
 package sean.dataexchange;
 
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.*;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
+import android.widget.TextView;
+
 
 import sean.dataexchange.common.activities.SampleActivityBase;
 import sean.dataexchange.common.logger.Log;
 import sean.dataexchange.common.logger.LogFragment;
+import sean.dataexchange.common.logger.LogView;
 import sean.dataexchange.common.logger.LogWrapper;
 import sean.dataexchange.common.logger.MessageOnlyLogFilter;
 
@@ -40,6 +53,11 @@ public class MainActivity extends SampleActivityBase {
 
     public static final String TAG = "MainActivity";
 
+    Button btnShowLocation;
+    TextView textLatitude;
+    TextView textLongitude;
+    GPSTracker gps;
+
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;
 
@@ -47,6 +65,8 @@ public class MainActivity extends SampleActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initComponents();
+        setListener();
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -55,6 +75,34 @@ public class MainActivity extends SampleActivityBase {
             transaction.commit();
         }
     }
+
+    private void initComponents(){
+        btnShowLocation = (Button) findViewById(R.id.btnGetLocation);
+        textLatitude = (TextView) findViewById(R.id.textLatitude);
+        textLongitude = (TextView) findViewById(R.id.textLongitude);
+    }
+
+    private void setListener(){
+
+        btnShowLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                gps = new GPSTracker(MainActivity.this);
+
+                if(gps.canGetLocation()){
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+                    textLatitude.setText("\nLatitude: "+""+latitude);
+                    textLongitude.setText("\nLongitude: "+""+longitude);
+                }
+                else{
+                    gps.showSettingsAlert();
+                }
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,3 +156,4 @@ public class MainActivity extends SampleActivityBase {
         Log.i(TAG, "Ready");
     }
 }
+

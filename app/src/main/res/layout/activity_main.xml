@@ -18,7 +18,26 @@
       android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginLeft="15dp"
       android:id="@+id/sample_main_layout">
+
+    <Button
+        android:id="@+id/btnGetLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Location" />
+
+    <TextView
+        android:id="@+id/textLatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/textLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" />
 
     <ViewAnimator
           android:id="@+id/sample_output"
@@ -43,7 +62,7 @@
         </ScrollView>
 
         <fragment
-              android:name="com.example.android.common.logger.LogFragment"
+              android:name="sean.dataexchange.common.logger.LogFragment"
               android:id="@+id/log_fragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />
@@ -61,5 +80,7 @@
           android:layout_width="match_parent"
           android:layout_height="0px" />
 
+
 </LinearLayout>
+
 
