@@ -40,9 +40,10 @@ import android.widget.ViewAnimator;
 import android.widget.TextView;
 
 
+import java.util.Calendar;
+
 import sean.dataexchange.common.activities.SampleActivityBase;
 import sean.dataexchange.common.logger.Log;
-import sean.dataexchange.common.logger.LogFragment;
 import sean.dataexchange.common.logger.LogWrapper;
 import sean.dataexchange.common.logger.MessageOnlyLogFilter;
 
@@ -63,6 +64,9 @@ public class MainActivity extends SampleActivityBase {
     TextView textLongitude;
     GPSTracker gps;
 
+    // Col;ect Survey Point Button
+    Button btnCollectSurveyPt;
+
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;
 
@@ -71,18 +75,43 @@ public class MainActivity extends SampleActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // -------------------------------------- Start Lat Long------------------------------------------------//
+        // TURN OFF ONCE SURVEY BUTTON WORKS
+        // Latitude and Longitude are stored to TextView files to be used in SurveyFileHandler
+        // Use textLatitude and textLongitude
         initComponents();
-        setListener();
+        //---------------------------------------End Lat Long --------------------------------------------------//
 
 
-        //User Input
+        //---------------------------------------- Start Time/Day ----------------------------------------------//
+
+        Calendar c = Calendar.getInstance();
+        //int millisec = c.get(Calendar.MILLISECOND);
+        //int seconds = c.get(Calendar.SECOND);
+        //int minutes = c.get(Calendar.MINUTE);
+        //int hours = c.get(Calendar.HOUR);
+        //int day = c.get(Calendar.DAY_OF_MONTH);
+        //int month = c.get(Calendar.MONTH);
+        //int year = c.get(Calendar.YEAR);
+
+        // Integer to String
+        // Integer.toString(millisec)
+
+        //----------------------------------------- End Time/Day -----------------------------------------------//
+
+
+        //----------------------------------------- Start User Input-------------------------------------------//
+
+        // The Name, Surveytype and Flagnumber are stored to TextView Files for use in the SurveyFileHandler
+        // Use: textName, textSurveyType, and textFlagNumber
+
         EditText editTextName = (EditText) findViewById(R.id.editName);
         EditText editSurveyType = (EditText) findViewById(R.id.editSurveyType);
         EditText editFlagNumber = (EditText) findViewById(R.id.editFlagNumber);
         final TextView textName = (TextView) findViewById(R.id.textName);
         final TextView textSurveyType = (TextView) findViewById(R.id.textSurveyType);
         final TextView textFlagNumber = (TextView) findViewById(R.id.textFlagNumber);
-
 
         editTextName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -104,8 +133,6 @@ public class MainActivity extends SampleActivityBase {
                 return handled;
             }
         });
-
-
 
         editSurveyType.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -140,6 +167,7 @@ public class MainActivity extends SampleActivityBase {
                     Toast.makeText(MainActivity.this, "Flag Number: " + inputText, Toast.LENGTH_SHORT).show();
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
                     textFlagNumber.setText(inputText);
 
                     handled = true;
@@ -149,10 +177,61 @@ public class MainActivity extends SampleActivityBase {
             }
         });
 
+        // -----------------------------------End User Input Work---------------------------------------------------------------//
+
+
+        //---------------------------------------Start Survey Data Point--------------------------------------------------//
+
+        btnCollectSurveyPt = (Button) findViewById(R.id.btnGetSurveyPoint);
+        btnCollectSurveyPt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                // Make Sure User Input Fields are completed
+                if ( !textFlagNumber.getText().toString().matches("\\d+") || textName.getText().toString()== "" || textSurveyType.getText().toString()== "") {
+
+                    if(!textFlagNumber.getText().toString().matches("\\d+"))
+                    {
+                        Toast.makeText(MainActivity.this, "Enter Numeric Flag", Toast.LENGTH_SHORT).show();
+                    } else if(textName.getText().toString()== "") {
+                        Toast.makeText(MainActivity.this, "Enter Missing User Name", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Enter Missing Survey Type", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    // Collect User Input
+                    int flagnumber = Integer.parseInt(textFlagNumber.getText().toString());
+                    String user = textName.getText().toString();
+                    String method = textSurveyType.getText().toString();
+
+                    // Collect Lat/Long
+                    gps = new GPSTracker(MainActivity.this);
+                    if (gps.canGetLocation()) {
+                        double latitude = gps.getLatitude();
+                        double longitude = gps.getLongitude();
+                        textLatitude.setText("\nLatitude: " + "" + latitude);
+                        textLongitude.setText("\nLongitude: " + "" + longitude);
+                    } else {
+                        gps.showSettingsAlert();
+                    }
+
+                    // Tell the User We have done something
+                    Toast.makeText(MainActivity.this, method + " Point collected at Flag Number: " + textFlagNumber.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                    // Set Flag Number to zero to make people enter next flag
+                    textFlagNumber.setText("");
+                    // USE SURVEY POINT HANDLER HERE
+
+                }
+
+            }
+        });
 
 
 
 
+        //---------------------------------------Start Survey Data Point----------------------------------------//
 
 
 
@@ -165,35 +244,13 @@ public class MainActivity extends SampleActivityBase {
     }
 
 
-    //GPS Stuff
+    //---------------------------------------- Begin Lat/Long ------------------------------------------//
     private void initComponents(){
-        btnShowLocation = (Button) findViewById(R.id.btnGetLocation);
         textLatitude = (TextView) findViewById(R.id.textLatitude);
         textLongitude = (TextView) findViewById(R.id.textLongitude);
     }
 
-
-    private void setListener(){
-
-        btnShowLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-                gps = new GPSTracker(MainActivity.this);
-
-                if(gps.canGetLocation()){
-                    double latitude = gps.getLatitude();
-                    double longitude = gps.getLongitude();
-                    textLatitude.setText("\nLatitude: "+""+latitude);
-                    textLongitude.setText("\nLongitude: "+""+longitude);
-                }
-                else{
-                    gps.showSettingsAlert();
-                }
-            }
-        });
-    }
-
+//---------------------------------------- End Lat/Long -------------------------------------------------//
 
 
     @Override
