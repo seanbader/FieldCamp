@@ -35,6 +35,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 import android.widget.TextView;
@@ -64,8 +65,12 @@ public class MainActivity extends SampleActivityBase {
     TextView textLongitude;
     GPSTracker gps;
 
-    // Col;ect Survey Point Button
+    // Collect Survey Point Button
     Button btnCollectSurveyPt;
+
+    // Method Type Drop Down Menu
+    private Spinner method_spinner;
+    private Button btnSubmit;
 
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;
@@ -107,10 +112,8 @@ public class MainActivity extends SampleActivityBase {
         // Use: textName, textSurveyType, and textFlagNumber
 
         EditText editTextName = (EditText) findViewById(R.id.editName);
-        EditText editSurveyType = (EditText) findViewById(R.id.editSurveyType);
         EditText editFlagNumber = (EditText) findViewById(R.id.editFlagNumber);
         final TextView textName = (TextView) findViewById(R.id.textName);
-        final TextView textSurveyType = (TextView) findViewById(R.id.textSurveyType);
         final TextView textFlagNumber = (TextView) findViewById(R.id.textFlagNumber);
 
         editTextName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -134,26 +137,6 @@ public class MainActivity extends SampleActivityBase {
             }
         });
 
-        editSurveyType.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
-                boolean handled = false;
-                if (i == EditorInfo.IME_ACTION_DONE)
-
-                {
-                    String inputText = textView.getText().toString();
-                    Toast.makeText(MainActivity.this, "Survey Type: " + inputText, Toast.LENGTH_SHORT).show();
-                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    textSurveyType.setText(inputText);
-
-                    handled = true;
-                }
-
-                return handled;
-            }
-        });
 
         editFlagNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -179,6 +162,13 @@ public class MainActivity extends SampleActivityBase {
 
         // -----------------------------------End User Input Work---------------------------------------------------------------//
 
+        //------------------------------------Select Survey Type------------------------------------------------------------//
+
+        method_spinner = (Spinner) findViewById(R.id.method_spinner);
+
+
+        //------------------------------------Select Survey Type------------------------------------------------------------//
+
 
         //---------------------------------------Start Survey Data Point--------------------------------------------------//
 
@@ -188,7 +178,7 @@ public class MainActivity extends SampleActivityBase {
             public void onClick(View arg0) {
 
                 // Make Sure User Input Fields are completed
-                if ( !textFlagNumber.getText().toString().matches("\\d+") || textName.getText().toString()== "" || textSurveyType.getText().toString()== "") {
+                if ( !textFlagNumber.getText().toString().matches("\\d+") || textName.getText().toString()== "" ) {
 
                     if(!textFlagNumber.getText().toString().matches("\\d+"))
                     {
@@ -203,7 +193,7 @@ public class MainActivity extends SampleActivityBase {
                     // Collect User Input
                     int flagnumber = Integer.parseInt(textFlagNumber.getText().toString());
                     String user = textName.getText().toString();
-                    String method = textSurveyType.getText().toString();
+                    String method = String.valueOf(method_spinner.getSelectedItem());
 
                     // Collect Lat/Long
                     gps = new GPSTracker(MainActivity.this);
@@ -221,6 +211,7 @@ public class MainActivity extends SampleActivityBase {
 
                     // Set Flag Number to zero to make people enter next flag
                     textFlagNumber.setText("");
+
                     // USE SURVEY POINT HANDLER HERE
 
                 }

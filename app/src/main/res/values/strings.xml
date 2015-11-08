@@ -40,4 +40,19 @@
 
     <string name="Record">Record Values</string>
 
+    <string name="survey_type">Survey Type</string>
+    <string-array name="method_label">
+        <item>Flagging</item>
+        <item>DGPS</item>
+        <item>Gravity</item>
+        <item>Seismic</item>
+        <item>Resistivity</item>
+        <item>TEM</item>
+        <item>MT</item>
+        <item>Hammer Seimsic</item>
+        <item>SP</item>
+        <item>Magnetics</item>
+    </string-array>
+
+
 </resources>

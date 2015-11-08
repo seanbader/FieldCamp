@@ -45,52 +45,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName|textCapWords"
-                        android:hint="Name"
-                        android:ems="10"
-                        android:id="@+id/editName"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:imeOptions="actionDone"/>
-
-                    <TextView
-                        android:id="@+id/textName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName|textCapWords"
-                        android:hint="Survey Type"
-                        android:ems="10"
-                        android:id="@+id/editSurveyType"
-                        android:layout_below="@+id/editName"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
-                        android:imeOptions="actionDone"/>
-
-                    <TextView
-                        android:id="@+id/textSurveyType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -102,7 +56,6 @@
                         android:hint="Flag Number"
                         android:ems="10"
                         android:id="@+id/editFlagNumber"
-                        android:layout_below="@+id/editSurveyType"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
@@ -115,6 +68,49 @@
                         android:gravity="center_vertical" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords"
+                        android:hint="Name"
+                        android:ems="10"
+                        android:id="@+id/editName"
+                        android:layout_below="@+id/editFlagNumber"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:imeOptions="actionDone"/>
+
+                    <TextView
+                        android:id="@+id/textName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dip"
+                        android:text="Survey Type"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    <Spinner
+                        android:id="@+id/method_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/method_label"
+                        android:prompt="@string/survey_type" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </ViewAnimator>
     </ScrollView>
