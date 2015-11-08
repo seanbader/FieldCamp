@@ -18,18 +18,23 @@
 package sean.dataexchange;
 
 import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View.OnClickListener;
 
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.*;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 import android.widget.TextView;
@@ -38,7 +43,6 @@ import android.widget.TextView;
 import sean.dataexchange.common.activities.SampleActivityBase;
 import sean.dataexchange.common.logger.Log;
 import sean.dataexchange.common.logger.LogFragment;
-import sean.dataexchange.common.logger.LogView;
 import sean.dataexchange.common.logger.LogWrapper;
 import sean.dataexchange.common.logger.MessageOnlyLogFilter;
 
@@ -53,6 +57,7 @@ public class MainActivity extends SampleActivityBase {
 
     public static final String TAG = "MainActivity";
 
+    // GPS Stuff
     Button btnShowLocation;
     TextView textLatitude;
     TextView textLongitude;
@@ -65,8 +70,91 @@ public class MainActivity extends SampleActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initComponents();
         setListener();
+
+
+        //User Input
+        EditText editTextName = (EditText) findViewById(R.id.editName);
+        EditText editSurveyType = (EditText) findViewById(R.id.editSurveyType);
+        EditText editFlagNumber = (EditText) findViewById(R.id.editFlagNumber);
+        final TextView textName = (TextView) findViewById(R.id.textName);
+        final TextView textSurveyType = (TextView) findViewById(R.id.textSurveyType);
+        final TextView textFlagNumber = (TextView) findViewById(R.id.textFlagNumber);
+
+
+        editTextName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_DONE)
+
+                {
+                    String inputText = textView.getText().toString();
+                    Toast.makeText(MainActivity.this, "Name: " + inputText, Toast.LENGTH_SHORT).show();
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    textName.setText(inputText);
+
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+
+
+
+        editSurveyType.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_DONE)
+
+                {
+                    String inputText = textView.getText().toString();
+                    Toast.makeText(MainActivity.this, "Survey Type: " + inputText, Toast.LENGTH_SHORT).show();
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    textSurveyType.setText(inputText);
+
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+
+        editFlagNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_DONE)
+
+                {
+                    String inputText = textView.getText().toString();
+                    Toast.makeText(MainActivity.this, "Flag Number: " + inputText, Toast.LENGTH_SHORT).show();
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    textFlagNumber.setText(inputText);
+
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+
+
+
+
+
+
+
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -76,11 +164,14 @@ public class MainActivity extends SampleActivityBase {
         }
     }
 
+
+    //GPS Stuff
     private void initComponents(){
         btnShowLocation = (Button) findViewById(R.id.btnGetLocation);
         textLatitude = (TextView) findViewById(R.id.textLatitude);
         textLongitude = (TextView) findViewById(R.id.textLongitude);
     }
+
 
     private void setListener(){
 
@@ -102,6 +193,7 @@ public class MainActivity extends SampleActivityBase {
             }
         });
     }
+
 
 
     @Override
@@ -147,11 +239,6 @@ public class MainActivity extends SampleActivityBase {
         // Filter strips out everything except the message text.
         MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
         logWrapper.setNext(msgFilter);
-
-        // On screen logging via a fragment with a TextView.
-        LogFragment logFragment = (LogFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.log_fragment);
-        msgFilter.setNext(logFragment.getLogView());
 
         Log.i(TAG, "Ready");
     }
