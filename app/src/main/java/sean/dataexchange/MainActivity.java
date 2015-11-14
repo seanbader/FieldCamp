@@ -70,6 +70,9 @@ public class MainActivity extends SampleActivityBase {
     TextView textLongitude;
     GPSTracker gps;
     SurveyPointHandler test;
+    int flagnumber_before;
+    int increment;
+    int flagnumber_after;
 
     // Collect Survey Point Button
     Button btnCollectSurveyPt;
@@ -88,6 +91,7 @@ public class MainActivity extends SampleActivityBase {
 
         test = new SurveyPointHandler("TestFile.txt", this.getApplicationContext());
 
+        flagnumber_before = 0;
 
         // -------------------------------------- Start Lat Long------------------------------------------------//
         // TURN OFF ONCE SURVEY BUTTON WORKS
@@ -199,6 +203,7 @@ public class MainActivity extends SampleActivityBase {
                     }
 
                 } else {
+
                     // Collect User Input
                     int flagnumber = Integer.parseInt(textFlagNumber.getText().toString());
                     String user = textName.getText().toString();
@@ -218,13 +223,17 @@ public class MainActivity extends SampleActivityBase {
                     }
 
                     // Tell the User We have done something
-                    //Toast.makeText(MainActivity.this, method + " Point collected at Flag Number: " + textFlagNumber.getText().toString(), Toast.LENGTH_SHORT).show();
-
-                    // Set Flag Number to zero to make people enter next flag
-                    textFlagNumber.setText("");
+                    Toast.makeText(MainActivity.this, method + " Point collected at Flag Number: " + textFlagNumber.getText().toString(), Toast.LENGTH_SHORT).show();
 
                     // USE SURVEY POINT HANDLER HERE
-                    test.saveSurveyPoint(latitude, longitude, flagnumber, user, method);
+                    //test.saveSurveyPoint(latitude, longitude, flagnumber, user, method);
+
+                    // Set Flag Number to zero to make people enter next flag
+                    flagnumber_after = flagnumber;
+
+                    increment = flagnumber_after - flagnumber_before;
+                    textFlagNumber.setText(Integer.toString(flagnumber + increment));
+                    flagnumber_before = flagnumber_after;
 
                 }
             }
