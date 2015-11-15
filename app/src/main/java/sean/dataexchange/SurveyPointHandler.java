@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,12 +26,26 @@ public class SurveyPointHandler extends Activity {
     File file;
     Context context;
 
-    public SurveyPointHandler(String filename1, Context context) {
-        filename = filename1;
+    public SurveyPointHandler(String filename, Context context) {
+        this.filename = filename;
         this.context = context;
-        path = Environment.getExternalStorageDirectory();
-        file = new File(Environment.DIRECTORY_DOCUMENTS, filename);
-        System.out.println("file setup: " + file);
+        this.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        File dir = new File(this.path, "FieldCamp");
+        System.out.print("File Status: ");
+        if (!dir.mkdirs()) {
+            System.out.println("Already Exists");
+        } else {
+            System.out.println("Directory Created");
+        }
+
+        this.file = new File(dir.getPath(), filename);
+        if(!this.file.exists()) {
+            try {
+                this.file.createNewFile();
+            } catch (IOException e) {
+                Log.e("Exception", "File write failed: " + e.toString());
+            }
+        }
     }
 
     public void saveSurveyPoint(double latitude,
@@ -38,9 +53,9 @@ public class SurveyPointHandler extends Activity {
                                    int flagNumber,
                                    String user,
                                    String method) {
-        //FileOutputStream fos = null;
+        FileOutputStream stream = null;
         try {
-            FileOutputStream  fos = openFileOutput(this.file.getName(), Context.MODE_APPEND);
+            stream = new FileOutputStream(this.file, true);
             Date date = new Date();
             String string = Double.toString(latitude);
             string += "," + Double.toString(longitude);
@@ -49,13 +64,11 @@ public class SurveyPointHandler extends Activity {
             string += "," + user;
             string += "," + method;
             string += "\n";
-            fos.write(string.getBytes());
-            fos.close();
+            stream.write(string.getBytes());
             System.out.println("Point Saved: " + file);
-
-        } catch (Exception e) {
-
-            System.out.println("Error: " + e);
+            stream.close();
+        } catch(IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 }
