@@ -18,20 +18,30 @@
       android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginLeft="15dp"
       android:id="@+id/sample_main_layout">
 
+    <TextView
+        android:id="@+id/textFlagNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="80dp"
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/textLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
         android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/textLongitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
         android:gravity="center_vertical" />
 
     <ScrollView
@@ -47,34 +57,31 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="phone"
                         android:hint="Flag Number"
                         android:ems="10"
                         android:id="@+id/editFlagNumber"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:imeOptions="actionDone"/>
-
-                    <TextView
-                        android:id="@+id/textFlagNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical" />
 
                 </LinearLayout>
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:inputType="textPersonName|textCapWords"
                         android:hint="Name"
                         android:ems="10"
@@ -82,19 +89,21 @@
                         android:layout_below="@+id/editFlagNumber"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:imeOptions="actionDone"/>
 
                     <TextView
                         android:id="@+id/textName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:gravity="center_vertical" />
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="15dp">
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -111,36 +120,33 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/btnGetSurveyPoint"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:text="Collect Point"
+                    android:textSize="40dp"/>
+
             </LinearLayout>
+
         </ViewAnimator>
+
+
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnGetSurveyPoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Collect Point" />
-
-    <ViewAnimator
-          android:id="@+id/sample_output"
-          android:layout_width="match_parent"
-          android:layout_height="0px"
-          android:layout_weight="1">
-
-    </ViewAnimator>
-
-    <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@android:color/darker_gray" />
-
     <FrameLayout
-          android:id="@+id/sample_content_fragment"
-          android:layout_weight="2"
-          android:layout_width="match_parent"
-          android:layout_height="0px" />
+        android:id="@+id/sample_content_fragment"
+        android:layout_weight="0"
+        android:layout_width="match_parent"
+        android:layout_height="0px">
+
+    </FrameLayout>
+
+
 
 
 </LinearLayout>

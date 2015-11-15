@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
@@ -42,6 +43,9 @@ import android.widget.ViewAnimator;
 import android.widget.TextView;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 
 import sean.dataexchange.common.activities.SampleActivityBase;
@@ -65,6 +69,10 @@ public class MainActivity extends SampleActivityBase {
     TextView textLatitude;
     TextView textLongitude;
     GPSTracker gps;
+    SurveyPointHandler test;
+    int flagnumber_before;
+    int increment;
+    int flagnumber_after;
 
     // Collect Survey Point Button
     Button btnCollectSurveyPt;
@@ -81,6 +89,9 @@ public class MainActivity extends SampleActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        test = new SurveyPointHandler("TestFile.txt", this.getApplicationContext());
+
+        flagnumber_before = 0;
 
         // -------------------------------------- Start Lat Long------------------------------------------------//
         // TURN OFF ONCE SURVEY BUTTON WORKS
@@ -174,6 +185,7 @@ public class MainActivity extends SampleActivityBase {
         //---------------------------------------Start Survey Data Point--------------------------------------------------//
 
         btnCollectSurveyPt = (Button) findViewById(R.id.btnGetSurveyPoint);
+
         btnCollectSurveyPt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -191,16 +203,19 @@ public class MainActivity extends SampleActivityBase {
                     }
 
                 } else {
+
                     // Collect User Input
                     int flagnumber = Integer.parseInt(textFlagNumber.getText().toString());
                     String user = textName.getText().toString();
                     String method = String.valueOf(method_spinner.getSelectedItem());
+                    double latitude = 0.0;
+                    double longitude = 0.0;
 
                     // Collect Lat/Long
                     gps = new GPSTracker(MainActivity.this);
                     if (gps.canGetLocation()) {
-                        double latitude = gps.getLatitude();
-                        double longitude = gps.getLongitude();
+                        latitude = gps.getLatitude();
+                        longitude = gps.getLongitude();
                         textLatitude.setText("\nLatitude: " + "" + latitude);
                         textLongitude.setText("\nLongitude: " + "" + longitude);
                     } else {
@@ -210,15 +225,20 @@ public class MainActivity extends SampleActivityBase {
                     // Tell the User We have done something
                     Toast.makeText(MainActivity.this, method + " Point collected at Flag Number: " + textFlagNumber.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                    // Set Flag Number to zero to make people enter next flag
-                    textFlagNumber.setText("");
-
                     // USE SURVEY POINT HANDLER HERE
+                    //test.saveSurveyPoint(latitude, longitude, flagnumber, user, method);
+
+                    // Set Flag Number to zero to make people enter next flag
+                    flagnumber_after = flagnumber;
+
+                    increment = flagnumber_after - flagnumber_before;
+                    textFlagNumber.setText(Integer.toString(flagnumber + increment));
+                    flagnumber_before = flagnumber_after;
 
                 }
-
             }
         });
+
 
 
 
