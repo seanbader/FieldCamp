@@ -268,13 +268,13 @@ public class MainActivity extends SampleActivityBase {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-
-
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem logToggle = menu.findItem(R.id.menu_toggle_log);
+        logToggle.setTitle(mLogShown ? R.string.survey : R.string.map);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -282,13 +282,12 @@ public class MainActivity extends SampleActivityBase {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId()) {
-            case R.id.fill:
-                Toast.makeText(MainActivity.this, "Work in Progress", Toast.LENGTH_SHORT).show();
+            case R.id.menu_toggle_log:
+                startActivity(new Intent(this, NewProject.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-        // return super.onOptionsItemSelected(item);
     }
 
 

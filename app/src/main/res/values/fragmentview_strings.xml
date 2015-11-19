@@ -14,5 +14,6 @@
   limitations under the License.
 -->
 <resources>
-    <string name="new_project">New Project</string>
+    <string name="map">Map</string>
+    <string name="survey">Survey</string>
 </resources>
