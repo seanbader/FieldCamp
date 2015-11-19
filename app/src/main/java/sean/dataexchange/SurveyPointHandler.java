@@ -71,4 +71,8 @@ public class SurveyPointHandler extends Activity {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
+
+    public void loadSurveyPoints(String filename) {
+        
+    }
 }

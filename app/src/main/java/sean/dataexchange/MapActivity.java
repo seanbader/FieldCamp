@@ -23,7 +23,7 @@ import sean.dataexchange.common.activities.SampleActivityBase;
 import sean.dataexchange.common.logger.Log;
 
 
-public class NewProject extends SampleActivityBase {
+public class MapActivity extends SampleActivityBase {
 
     private boolean mLogShown;
 

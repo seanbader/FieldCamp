@@ -18,14 +18,8 @@
 package sean.dataexchange;
 
 import android.content.Context;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View.OnClickListener;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -39,19 +33,12 @@ import android.widget.EditText;
 
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ViewAnimator;
 import android.widget.TextView;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Calendar;
 
 import sean.dataexchange.common.activities.SampleActivityBase;
-import sean.dataexchange.common.logger.Log;
-import sean.dataexchange.common.logger.LogWrapper;
-import sean.dataexchange.common.logger.MessageOnlyLogFilter;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -283,7 +270,7 @@ public class MainActivity extends SampleActivityBase {
     {
         switch (item.getItemId()) {
             case R.id.menu_toggle_log:
-                startActivity(new Intent(this, NewProject.class));
+                startActivity(new Intent(this, MapActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
