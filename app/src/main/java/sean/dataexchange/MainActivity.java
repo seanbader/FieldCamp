@@ -213,7 +213,7 @@ public class MainActivity extends SampleActivityBase {
                     Toast.makeText(MainActivity.this, method + " Point collected at Flag Number: " + textFlagNumber.getText().toString(), Toast.LENGTH_SHORT).show();
 
                     // USE SURVEY POINT HANDLER HERE
-                    test.saveSurveyPoint(latitude, longitude, flagnumber, user, method);
+                    test.recordSurveyPoint(latitude, longitude, flagnumber, user, method);
 
                     // Set Flag Number to zero to make people enter next flag
                     flagnumber_after = flagnumber;
