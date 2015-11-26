@@ -75,6 +75,10 @@ public class MainActivity extends SampleActivityBase {
         setContentView(R.layout.activity_main);
 
         test = new SurveyPointHandler("TestFile.txt", this.getApplicationContext());
+        test.loadSurveyPoints();
+
+
+
 
 
         if (savedInstanceState == null) {

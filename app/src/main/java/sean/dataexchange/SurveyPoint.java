@@ -101,24 +101,42 @@ public class SurveyPoint implements Comparable<SurveyPoint> {
     }
 
     @Override
+    // I Butchered this override... sorry
     public int compareTo(SurveyPoint sp) {
-        if(sp.getTime() < this.getTime()) {
-            return -1;
-        } else if (sp.getTime() == this.getTime()) {
+        //if(sp.getTime() < this.getTime()) {
+        //    return -1;
+        //} else
+        Long c = this.getTime();
+        Long d = sp.getTime();
+
+        Log.e("eqauls: ", c.toString() + " and " + d.toString() );
+        if (this.getTime() == sp.getTime()) {
+
+            Log.e("equals: ", "THEY ARE EQUAL" );
             return 0;
-        } else {
+        }
+        else {
+            Log.e("equals: ", "THEY ARE NOT EQUAL" );
             return 1;
         }
     }
 
     @Override
+    // DO NOT TOUCH THIS OVERRIDE
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        SurveyPoint that = (SurveyPoint) o;
+        SurveyPoint mypoint =(SurveyPoint) o;
+        Long c = this.getTime();
+        Long d = mypoint.getTime();
 
-        return time == that.time;
+        Log.e("EQUAL : equals: ", c.toString() + " and " + d.toString() );
+        if (this.getTime() == mypoint.getTime()) {
+
+            return true;
+        }
+        else {
+            return false;
+        }
 
     }
 

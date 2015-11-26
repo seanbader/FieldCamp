@@ -313,8 +313,10 @@ public class BluetoothChatFragment extends Fragment {
                     String readMessage = new String(readBuf, 0, msg.arg1);
 
                     System.out.println(readMessage);
+
+                    //test.loadSurveyPoints();
                     test.addTransmittedPoints(readMessage);
-                    test.saveSurveyPoints();
+
 
                     //mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
                     break;

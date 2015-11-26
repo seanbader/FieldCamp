@@ -6,6 +6,7 @@ import android.nfc.Tag;
 import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.ViewDebug;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -96,14 +97,19 @@ public class SurveyPointHandler extends Activity {
                 is = new FileInputStream(this.file);
                 reader = new BufferedReader(new InputStreamReader(is));
                 String line = "Hello World!";
+                line = reader.readLine();
+                surveyPoints.clear();
                 while(line != null){
-                    line = reader.readLine();
                     SurveyPoint sp = new SurveyPoint();
                     sp.fromString(line);
-                    this.surveyPoints.add(sp);
+                    if (!surveyPoints.contains(sp)) {
+                        this.surveyPoints.add(sp);
+                    }
+                    line = reader.readLine();
                 }
             } catch(Exception e) {
                 Log.e("File Open Error", "Error opening "+this.file.toString());
+                Log.e("File Open Error: ", e.toString());
             }
         }
     }
@@ -136,15 +142,17 @@ public class SurveyPointHandler extends Activity {
     public void saveSurveyPoints() {
         FileOutputStream stream = null;
         try {
-
+            stream = new FileOutputStream(this.file,false);
+            int c = this.surveyPoints.size();
+            Log.e("sp to file: ", Integer.toString(c));
             for (SurveyPoint sp : this.surveyPoints) {
-                stream = new FileOutputStream(this.file,true);
+
 
                 Log.e("sp to file: ", sp.toString());
                 stream.write(sp.toString().getBytes());
 
-                stream.close();
             }
+            stream.close();
 
         } catch(Exception e) {
             Log.e("File Output Error", "Error writing to "+this.file.toString());
@@ -164,19 +172,35 @@ public class SurveyPointHandler extends Activity {
     }
 
     public void addTransmittedPoints(String points) {
+
         String[] lines = points.split(":");
+        surveyPoints.clear();
+        int c = this.surveyPoints.size();
+        Log.e("tree cleared: ", Integer.toString(c));
+        this.loadSurveyPoints();
+        int d = this.surveyPoints.size();
+        Log.e("tree filled: ", Integer.toString(d));
 
         int min = 0;
         int max = lines.length - 1;
-
         while ( min < max ) {
             SurveyPoint sp = new SurveyPoint();
-            Log.e("sp added: ", lines[min]);
+            Log.e("sp tansmitted: ", lines[min]);
 
             sp.fromString(lines[min]);
-            surveyPoints.add(sp);
+            Log.e("Survey Points: ", surveyPoints.toString());
+
+            if (doesnt_existsInTree(sp)){
+                Log.e("ATP Adding: ", "New Point" );
+                surveyPoints.add(sp);
+            }
+            else {
+                Log.e("ATP Not adding: ", "Already Exists");
+            }
+            // surveyPoints.contains.....
             min = min + 1;
         }
+        this.saveSurveyPoints();
 
     }
 
@@ -184,5 +208,16 @@ public class SurveyPointHandler extends Activity {
 
     public void mergeSurveyPoints(Set<SurveyPoint> points) {
         this.surveyPoints.addAll(points);
+    }
+
+    public boolean doesnt_existsInTree(SurveyPoint sp)
+    {
+        for (SurveyPoint sp1 : this.surveyPoints) {
+            if(sp1.equals(sp))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
