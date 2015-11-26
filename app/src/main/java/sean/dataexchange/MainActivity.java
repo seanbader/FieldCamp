@@ -52,7 +52,6 @@ public class MainActivity extends SampleActivityBase {
     public static final String TAG = "MainActivity";
 
     // GPS Stuff
-    Button btnShowLocation;
     TextView textLatitude;
     TextView textLongitude;
     GPSTracker gps;
@@ -66,7 +65,6 @@ public class MainActivity extends SampleActivityBase {
 
     // Method Type Drop Down Menu
     private Spinner method_spinner;
-    private Button btnSubmit;
 
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;
@@ -77,6 +75,14 @@ public class MainActivity extends SampleActivityBase {
         setContentView(R.layout.activity_main);
 
         test = new SurveyPointHandler("TestFile.txt", this.getApplicationContext());
+
+
+        if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            BluetoothChatFragment fragment = new BluetoothChatFragment();
+            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.commit();
+        }
 
         flagnumber_before = 0;
 

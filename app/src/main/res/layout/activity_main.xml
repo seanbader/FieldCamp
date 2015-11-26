@@ -18,7 +18,8 @@
       android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/sample_main_layout">
+      android:id="@+id/sample_main_layout"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/textFlagNumber"
@@ -46,8 +47,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="159dp"
-        android:layout_weight="7.69">
+        android:layout_height="wrap_content"
+        android:layout_weight="1.13">
         <ViewAnimator
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -123,13 +124,20 @@
                 <Button
                     android:id="@+id/btnGetSurveyPoint"
                     android:layout_width="fill_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="138dp"
                     android:gravity="center"
                     android:layout_marginTop="40dp"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
                     android:text="Collect Point"
                     android:textSize="40dp"/>
+
+                <FrameLayout
+                    android:id="@+id/sample_content_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -138,13 +146,7 @@
 
     </ScrollView>
 
-    <FrameLayout
-        android:id="@+id/sample_content_fragment"
-        android:layout_weight="0"
-        android:layout_width="match_parent"
-        android:layout_height="0px">
 
-    </FrameLayout>
 
 
 
