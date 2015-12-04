@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,6 @@ import java.util.Calendar;
 import sean.dataexchange.common.activities.SampleActivityBase;
 import sean.dataexchange.common.logger.Log;
 
-
 public class MapActivity extends SampleActivityBase {
 
     private boolean mLogShown;
@@ -30,10 +30,15 @@ public class MapActivity extends SampleActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_project);
+        setContentView(R.layout.map_activity);
 
         String varString = getIntent().getStringExtra("Test");
         Log.d("HelloWorld - Second Activity", varString);
+
+        ImageView image = (ImageView) findViewById(R.id.image);
+        image.setImageResource(R.drawable.kafadar);
+        //Top Left:     39.752682, -105.223834
+        //Bottom Right: 39.749394, -105.219008
 
     }
 
@@ -61,7 +66,6 @@ public class MapActivity extends SampleActivityBase {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }
 
