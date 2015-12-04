@@ -35,8 +35,10 @@ public class MapActivity extends SampleActivityBase {
         String varString = getIntent().getStringExtra("Test");
         Log.d("HelloWorld - Second Activity", varString);
 
-        ImageView image = (ImageView) findViewById(R.id.image);
-        image.setImageResource(R.drawable.kafadar);
+        TouchImageView img = new TouchImageView(this);
+        img.setImageResource(R.drawable.kafadar);
+        img.setMaxZoom(4f);
+        setContentView(img);
         //Top Left:     39.752682, -105.223834
         //Bottom Right: 39.749394, -105.219008
 
