@@ -1,19 +1,19 @@
-<LinearLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="fitCenter"
+    android:id="@+id/rl_main">
+
+    <ImageView
+      android:id="@+id/kafadar"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginLeft="0dp"
-      android:id="@+id/sample_main_layout">
-
-      <ImageView
-          android:id="@+id/image"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:scaleType="fitCenter"
-          android:src="@drawable/kafadar"/>
+      android:scaleType="fitCenter"
+      android:src="@drawable/kafadar"/>
 
 
-</LinearLayout>
+</RelativeLayout>
 
 

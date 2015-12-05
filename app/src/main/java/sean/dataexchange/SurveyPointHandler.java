@@ -220,4 +220,8 @@ public class SurveyPointHandler extends Activity {
         }
         return true;
     }
+
+    public TreeSet<SurveyPoint> getSurveyPoints() {
+        return new TreeSet<SurveyPoint>(this.surveyPoints);
+    }
 }
