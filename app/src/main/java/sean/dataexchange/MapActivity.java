@@ -154,7 +154,7 @@ public class MapActivity extends SampleActivityBase {
             // Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.kafadar);
 
             // canvas.drawBitmap(b, 0, 0, paint);
-            canvas.drawCircle(point.x, point.y, 100, paint);
+            // canvas.drawCircle(point.x, point.y, 100, paint);
             this.topLeft.setX(iv.getLeft());
             this.topLeft.setY(iv.getTop());
             this.bottomRight.setX(iv.getRight());
@@ -162,7 +162,7 @@ public class MapActivity extends SampleActivityBase {
             for(SurveyPoint sp : this.tsp) {
                 GeoPoint p = new GeoPoint(sp.getLatitude(), sp.getLongitude());
                 p.setImageBounds(this.topLeft, this.bottomRight);
-                canvas.drawCircle(p.getX(), p.getY(), 20, paint);
+                canvas.drawCircle(p.getX(), p.getY(), 10, paint);
             }
 
         }
