@@ -99,8 +99,8 @@ public class MapActivity extends SampleActivityBase {
             }
 
             public void setImageBounds(GeoPoint topLeft, GeoPoint bottomRight) {
-                this.x = (float)((Math.abs(topLeft.getLatitude() - this.latitude)/Math.abs(topLeft.getLatitude()-bottomRight.getLatitude()))*((double)bottomRight.getX() - (double)topLeft.getX()));
-                this.y = (float)((Math.abs(topLeft.getLongitude() - this.longitude)/Math.abs(topLeft.getLongitude()-bottomRight.getLongitude()))*((double)bottomRight.getY() - (double)topLeft.getY()));
+                this.y = (float)((Math.abs(topLeft.getLatitude() - this.latitude)/Math.abs(topLeft.getLatitude()-bottomRight.getLatitude()))*((double)bottomRight.getY() - (double)topLeft.getY()));
+                this.x = (float)((Math.abs(topLeft.getLongitude() - this.longitude)/Math.abs(topLeft.getLongitude()-bottomRight.getLongitude()))*((double)bottomRight.getX() - (double)topLeft.getX()));
             }
 
             public double getLatitude() {
